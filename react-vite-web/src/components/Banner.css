@@ -1,0 +1,27 @@
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    justify-content: center;
+}
+/* Customize transition speed */
+.carousel-item {
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Настройте прозрачность */
+    z-index: 1; /* Помещаем поверх изображения */
+}
+
+/* Контент поверх слоя */
+.carousel-caption {
+    position: relative;
+    z-index: 2; /* Поднимаем текст поверх затемнения */
+}
