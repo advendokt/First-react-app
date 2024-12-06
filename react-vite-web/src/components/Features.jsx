@@ -4,7 +4,7 @@ import { FaCogs, FaTachometerAlt, FaTable } from 'react-icons/fa';
 
 function Features() {
     return (
-        <div className="container px-4 py-5">
+        <div id="features"className="container px-4 py-5">
             <h2 className="pb-2 border-bottom">Features with title</h2>
 
             <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
