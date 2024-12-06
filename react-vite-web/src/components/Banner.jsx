@@ -1,9 +1,11 @@
 import React from 'react';
-import cyberpank2 from '../assets/images/cyberpank2.jpg';
+import cyberpank from '../assets/images/cyberpank.jpg';
 import aigenerated86124871280 from '../assets/images/ai-generated-8612487_1280.jpg';
-import Sakura3 from '../assets/images/sakura3.jpg';
+import aipunk from '../assets/images/aipunk.jpg';
 
 import '../components/Banner.css';
+
+
 
 
 function Banner() {
@@ -14,16 +16,16 @@ function Banner() {
                     <div className="carousel-inner">
                         <div className="carousel-item active">
                             <div className="dark-overlay"></div>
-                            <img src={cyberpank2} className="d-block w-100" alt="Beautiful Sakura Blossom 1" />
+                            <img src={cyberpank} className="d-block w-100 carousel-img" alt="Beautiful Sakura Blossom 1" />
                             <div className="carousel-caption"></div>
                             <div className="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
+                                <h5>First slide lable</h5>
                                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                             </div>
                         </div>
                         <div className="carousel-item">
                             <div className="dark-overlay"></div>
-                            <img src={aigenerated86124871280 } className="d-block w-100" alt="Beautiful Sakura Blossom 2" />
+                            <img src={aigenerated86124871280 } className="d-block w-100 carousel-img" alt="Beautiful Sakura Blossom 2" />
                             <div className="carousel-caption"></div>
                             <div className="carousel-caption d-none d-md-block">
                                 <h5>Second slide label</h5>
@@ -32,7 +34,7 @@ function Banner() {
                         </div>
                         <div className="carousel-item">
                             <div className="dark-overlay"></div>
-                                <img src={Sakura3} className="d-block w-100" alt="Beautiful Sakura Blossom 3" />
+                                <img src={aipunk} className="d-block w-100 carousel-img" alt="Beautiful Sakura Blossom 3" />
                             <div className="carousel-caption"></div>
                             <div className="carousel-caption d-none d-md-block">
                                 <h5>Third slide label</h5>
