@@ -3,6 +3,9 @@ import Footer from "./components/footer" // Ensure this matches the actual file 
 import Banner from "./components/Banner";
 import Features from "./components/Features";
 import About from "./components/About"
+import Service from "./components/Service"
+import Gallery from "./components/Gallery"
+import Contact from "./components/Contact"
 
 
 
@@ -21,20 +24,27 @@ import './components/Header.css';
 import './components/Footer.css';
 import './components/Banner.css';
 import './App.css';
+import { ImOffice } from "react-icons/im";
+
+
 
 function App() {
 
   return (
     <>
-      <Header />
-      <Banner />
-      <Features />
-      <About />
+      <div>
+        <Header />
+        <Banner />
+        <Features />
+        <About />
+        <Service />
+        <Gallery />
+        <Contact />
 
 
+        <Footer />
+      </div>
 
-
-      <Footer /> 
     </>
   );
 }

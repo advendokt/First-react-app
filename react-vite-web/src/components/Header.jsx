@@ -32,8 +32,8 @@ function Header() {
                             See more
                         </a>
                         <ul className="dropdown-menu dropdown-menu-dark">
-                            <li><a className="dropdown-item" href="#">About us</a></li>
-                            <li><a className="dropdown-item" href="#">Service</a></li>
+                            <li><a className="dropdown-item" href="#about">About us</a></li>
+                            <li><a className="dropdown-item" href="#service">Service</a></li>
                             <li><a className="dropdown-item" href="#">Gallery</a></li>
                             <li>
                             <hr className="dropdown-divider" />
