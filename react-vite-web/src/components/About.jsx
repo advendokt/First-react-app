@@ -4,7 +4,7 @@ import './About.css';
 function About() {
 
     return(
-        <div className="container mt-5">
+        <div className="bg-light-subtle">
 
             <h2 className="pb-2 border-bottom container px-4 py-5" >About us</h2>
         
