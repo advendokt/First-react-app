@@ -34,18 +34,18 @@ function Header() {
                         <ul className="dropdown-menu dropdown-menu-dark">
                             <li><a className="dropdown-item" href="#about">About us</a></li>
                             <li><a className="dropdown-item" href="#service">Service</a></li>
-                            <li><a className="dropdown-item" href="#">Gallery</a></li>
+                            <li><a className="dropdown-item" href="#gallery">Gallery</a></li>
                             <li>
-                            <hr className="dropdown-divider" />
+                                <hr className="dropdown-divider" />
                             </li>
-                            <li><a className="dropdown-item" href="#">Contact</a></li>
+                            <li><a className="dropdown-item" href="#contact">Contact</a></li>
                         </ul>
                         </li>
                     </ul>
-                    <form className="d-flex mt-3" role="search">
-                        <input className="form-control me-2" type="search" placeholder="search" aria-label="search" />
-                        <button className="btn btn-success" type="submit">search</button>
-                    </form>
+                        <form className="d-flex mt-3" role="search">
+                            <input className="form-control me-2" type="search" placeholder="search" aria-label="search" />
+                            <button className="btn btn-success" type="submit">search</button>
+                        </form>
                     </div>
                 </div>
                 </div>

@@ -32,7 +32,7 @@ function Gallery() {
     }, []);
 
     return (
-        <div className="container">
+        <div id='gallery' className="container">
             <h1>Photo/Gallery</h1>
             <hr />
             <div className="row">
