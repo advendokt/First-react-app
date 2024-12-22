@@ -1,3 +1,5 @@
+import React, { useState, useEffect} from 'react';
+
 import Header from "./components/Header";
 import Footer from "./components/footer" // Ensure this matches the actual file name
 import Banner from "./components/Banner";
@@ -6,6 +8,8 @@ import About from "./components/About"
 import Service from "./components/Service"
 import Gallery from "./components/Gallery"
 import Contact from "./components/Contact"
+
+import Loading from "./components/Loading";
 
 
 
@@ -27,13 +31,25 @@ import './App.css';
 import { ImOffice } from "react-icons/im";
 
 
-
-
 function App() {
+
+  const [loading, setLoading] = useState(true); // Стейт для загрузки
+
+  // Эмуляция загрузки данных
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Когда данные загружены, убираем анимацию загрузки
+    }, 5000); // Симулируем задержку в 5 секунд
+  }, []);
+
+  // Пока идет загрузка, показываем компонент Loading
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
-      <div>
+      <div style={{ overflowX: 'hidden ' }}>
         <Header />
         <Banner />
         <Features />
@@ -43,7 +59,7 @@ function App() {
         <Contact />
 
 
-        
+
         <Footer />
       </div>
 
