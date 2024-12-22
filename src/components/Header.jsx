@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from '../assets/logo.png';
 import './Header.css';
+import ROUTES from '../constants/Routes';
+import { Link } from 'react-router-dom';
 
 function Header() {
 
@@ -21,9 +23,7 @@ function Header() {
                     </div>
                     <div className="offcanvas-body">
                     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
+                        <Link className="nav-link active" aria-current="page" to={ROUTES.HOME}>Home</Link>
                         <li className="nav-item">
                         <a className="nav-link" href="#features">Features</a>
                         </li>
@@ -39,6 +39,9 @@ function Header() {
                                 <hr className="dropdown-divider" />
                             </li>
                             <li><a className="dropdown-item" href="#contact">Contact</a></li>
+                        </ul>
+                        <ul className='dropdown-menu'> d
+
                         </ul>
                         </li>
                     </ul>

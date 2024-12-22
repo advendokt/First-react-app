@@ -6,7 +6,24 @@ import 'aos/dist/aos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShieldAlt, faCloud, faLaptop, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
+import { useNavigate } from 'react-router-dom';
+
+
 function Service() {
+    const navigate = useNavigate();
+
+    const handleAnnouncementsClick = () => {
+        navigate('/announcements');
+    };
+
+    const handleServiceMoreClick = () => {
+        navigate('/service-more');
+    };
+
+    const handleWhyUsClick = () => {
+        navigate('/why-us');
+    };
+    
     // Initialize AOS
     useEffect(() => {
         AOS.init({
@@ -62,7 +79,7 @@ function Service() {
                         </div>
                     </div>
                     <div className="text-center mt-4">
-                        <button className="btn btn-primary">Explore More Topics</button>
+                        <button className="btn btn-primary" onClick={handleServiceMoreClick}>Explore More Topics</button>
                     </div>
                 </div>
 
@@ -99,7 +116,7 @@ function Service() {
                         </a>
                     </div>
                     <div className="text-center mt-4">
-                        <button className="btn btn-primary">See All Announcements & Alerts</button>
+                        <button className="btn btn-primary" onClick={handleAnnouncementsClick}>See All Announcements & Alerts</button>
                     </div>
                 </div>
             </div>
@@ -112,7 +129,7 @@ function Service() {
                     reliable, and secure</strong> support services tailored to empower our clients. Our expertise
                     ensures that your technology works for you—not against you.
                 </p>
-                <button className="btn btn-primary mt-3">Get in Touch</button>
+                <button className="btn btn-primary mt-3" onClick={handleWhyUsClick}>Get in Touch</button>
             </div>
         </div>
     );

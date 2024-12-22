@@ -1,69 +1,69 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Header from "./components/Header";
-import Footer from "./components/footer" // Ensure this matches the actual file name
-import Banner from "./components/Banner";
-import Features from "./components/Features";
-import About from "./components/About"
-import Service from "./components/Service"
-import Gallery from "./components/Gallery"
-import Contact from "./components/Contact"
+// Импортируем компоненты
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ROUTES from './constants/Routes'; // Убедись, что путь правильный
 
-import Loading from "./components/Loading";
+// Страницы
+import FeaturesMore from './Pages/FeaturesMore.jsx';
+import AboutMore from './Pages/AboutMore.jsx';
+import ServiceMore from './Pages/ServiceMore.jsx';
+import Banner from './components/Banner';
+import Features from './components/Features';
+import About from './components/About';
+import Service from './components/Service';
+import Gallery from './components/Gallery';
+import Contact from './components/Contact';
 
+// Анимация загрузки
+import Loading from './components/Loading';
 
-
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-import 'aos/dist/aos.css';
-import 'aos/dist/aos.js';
-
-
-
-import './components/Header.css';
-import './components/Footer.css';
-import './components/Banner.css';
+ // Импорт стилей
 import './App.css';
-import { ImOffice } from "react-icons/im";
-
 
 function App() {
+  const [loading, setLoading] = useState(true);
 
-  const [loading, setLoading] = useState(true); // Стейт для загрузки
-
-  // Эмуляция загрузки данных
+  // Эмуляция загрузки
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false); // Когда данные загружены, убираем анимацию загрузки
-    }, 5000); // Симулируем задержку в 5 секунд
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer); // Очистка таймера при размонтировании компонента
   }, []);
 
-  // Пока идет загрузка, показываем компонент Loading
+  // Отображение экрана загрузки
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <>
-      <div style={{ overflowX: 'hidden ' }}>
-        <Header />
-        <Banner />
-        <Features />
-        <About />
-        <Service />
-        <Gallery />
-        <Contact />
-
-
-
-        <Footer />
-      </div>
-
-    </>
+    <Router>
+      <Header />
+      <Routes>
+        {/* Главная страница */}
+        <Route
+          path={ROUTES.HOME}
+          element={
+            <>
+              <Banner />
+              <Features />
+              <About />
+              <Service />
+              <Gallery />
+              <Contact />
+            </>
+          }
+        />
+        {/* Дополнительные страницы */}
+        <Route path={ROUTES.FEATURES_MORE} element={<FeaturesMore />} />
+        <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
+        <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 

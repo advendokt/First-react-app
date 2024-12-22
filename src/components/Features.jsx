@@ -3,8 +3,11 @@ import './Features.css';
 import { FaCogs, FaTachometerAlt, FaTable } from 'react-icons/fa';
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Features() {
+  const navigate = useNavigate(); // Initialize navigate function
+
   // Initialize AOS
   useEffect(() => {
     AOS.init({
@@ -14,6 +17,11 @@ function Features() {
       once: true, // Animation happens only once
     });
   }, []);
+
+  // Button click handler to navigate to /features-more
+  const handleNavigate = () => {
+    navigate('/features-more'); // Navigate to the FeaturesMore page
+  };
 
   return (
     <div id="features" className=" px-4 py-5" data-aos="fade-up ">
@@ -29,9 +37,10 @@ function Features() {
             We'll add onto it with another sentence and probably just keep
             going until we run out of words.
           </p>
-          <a href="#" className="btn btn-primary btn-lg">
-            Primary button
-          </a>
+          {/* Button that triggers navigation */}
+          <button className="btn btn-primary btn-lg" onClick={handleNavigate}>
+            Go to Features More
+          </button>
         </div>
 
         <div className="col">
