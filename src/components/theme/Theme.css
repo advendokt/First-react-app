@@ -1,0 +1,29 @@
+/* Светлая тема (по умолчанию) */
+body.bg-light {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Темная тема */
+body.bg-dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Для всех заголовков и текста в темной теме */
+body.bg-dark h1,
+body.bg-dark h2,
+body.bg-dark h3,
+body.bg-dark h4,
+body.bg-dark h5,
+body.bg-dark p,
+body.bg-dark a,
+body.bg-dark span {
+    color: #fff;
+}
+
+/* Автоматическая тема (если используется) */
+body.bg-auto {
+    background-color: #f8f9fa;
+    color: #000;
+}
