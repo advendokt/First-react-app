@@ -6,6 +6,9 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
     en: {
         translation: {
+          //Feature
+
+          //about
             aboutTitle: "About Us",
             label1: "Label 1",
             description1: "We are a team of passionate developers dedicated to creating amazing web applications.",
@@ -16,10 +19,18 @@ const resources = {
             aboutMore: "About More",
             aboutDescription: "Learn more about our journey, values, and the team behind our success.",
             readMore: "Read More",
+          //Topic
+
+          //Anontcments
+
+          //Contact
         }
     },
     ru: {
         translation: {
+          //Feature
+
+          //about
             aboutTitle: "О нас",
             label1: "Метка 1",
             description1: "Мы — команда увлечённых разработчиков, создающих потрясающие веб-приложения.",
@@ -30,6 +41,33 @@ const resources = {
             aboutMore: "Подробнее",
             aboutDescription: "Узнайте больше о нашем пути, ценностях и команде, стоящей за нашим успехом.",
             readMore: "Читать далее",
+          //Topic
+
+          //Anontcments
+
+          //Contact
+        }
+    },
+    et: {
+        translation: {
+          //Feature
+
+          //about
+            aboutTitle: "Meist",
+            label1: "Märgis 1",
+            description1: "Me oleme kirglik arendajate meeskond, kes on pühendunud hämmastavate veebirakenduste loomisele.",
+            label2: "Märgis 2",
+            description2: "Meie missioon on pakkuda kvaliteetseid tarkvaralahendusi.",
+            label3: "Märgis 3",
+            description3: "Me ületame oma klientide ootused.",
+            aboutMore: "Loe lähemalt",
+            aboutDescription: "Uuri lähemalt meie teekonda, väärtusi ja meeskonda, kes on meie edu taga.",
+            readMore: "Loe rohkem",
+          //Topic
+
+          //Anontcments
+
+          //Contact
         }
     }
 };
