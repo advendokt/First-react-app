@@ -19,7 +19,7 @@ const About = () => {
   };
 
   return (
-    <div id='about'>
+    <div id='about' className="px-4 py-5">
       <h2 className="pb-2 border-bottom container px-4 py-5" data-aos="fade-down">
         {t('aboutTitle')}  {/* Использование перевода */}
       </h2>

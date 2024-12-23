@@ -4,8 +4,10 @@ import { FaCogs, FaTachometerAlt, FaTable } from 'react-icons/fa';
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 function Features() {
+  const { t } = useTranslation(); // Initialize translation function
   const navigate = useNavigate(); // Initialize navigate function
 
   // Initialize AOS
@@ -24,22 +26,18 @@ function Features() {
   };
 
   return (
-    <div id="features" className=" px-4 py-5" data-aos="fade-up ">
-      <h2 className="pb-2 border-bottom">Features with title</h2>
+    <div id="features" className="px-4 py-5" data-aos="fade-up">
+      <h2 className="pb-2 border-bottom">{t('featuresTitle')}</h2>
 
       <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
         <div className="col d-flex flex-column align-items-start gap-2" data-aos="fade-right">
-          <h2 className="fw-bold text-body-emphasis">
-            Left-aligned title explaining these awesome features
-          </h2>
+          <h2 className="fw-bold text-body-emphasis">{t('titleDescription')}</h2>
           <p className="text-body-secondary">
-            Paragraph of text beneath the heading to explain the heading.
-            We'll add onto it with another sentence and probably just keep
-            going until we run out of words.
+            {t('paragraphDescription')}
           </p>
           {/* Button that triggers navigation */}
           <button className="btn btn-primary btn-lg" onClick={handleNavigate}>
-            Go to Features More
+            {t('goToFeaturesMore')}
           </button>
         </div>
 
@@ -49,9 +47,9 @@ function Features() {
               <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                 <FaTable />
               </div>
-              <h4 className="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
+              <h4 className="fw-semibold mb-0 text-body-emphasis">{t('featuredTitle1')}</h4>
               <p className="text-body-secondary">
-                Paragraph of text beneath the heading to explain the heading.
+                {t('featuredDescription1')}
               </p>
             </div>
 
@@ -59,9 +57,9 @@ function Features() {
               <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                 <FaCogs />
               </div>
-              <h4 className="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
+              <h4 className="fw-semibold mb-0 text-body-emphasis">{t('featuredTitle2')}</h4>
               <p className="text-body-secondary">
-                Paragraph of text beneath the heading to explain the heading.
+                {t('featuredDescription2')}
               </p>
             </div>
 
@@ -69,9 +67,9 @@ function Features() {
               <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                 <FaTachometerAlt />
               </div>
-              <h4 className="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
+              <h4 className="fw-semibold mb-0 text-body-emphasis">{t('featuredTitle3')}</h4>
               <p className="text-body-secondary">
-                Paragraph of text beneath the heading to explain the heading.
+                {t('featuredDescription3')}
               </p>
             </div>
           </div>
