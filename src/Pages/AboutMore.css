@@ -1,0 +1,34 @@
+.about-more-container {
+    padding: 20px;
+  }
+  
+  .company-info,
+  .team-info,
+  .additional-info {
+    margin-bottom: 40px;
+  }
+  
+  .company-image,
+  .team-image {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  .team-member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-details {
+    margin-left: 20px;
+  }
+  
+  .team-details h3 {
+    margin: 0;
+  }
+  
+  .team-details p {
+    margin: 5px 0;
+  }

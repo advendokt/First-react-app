@@ -54,7 +54,6 @@ function App() {
               <About />
               <Service />
               <Gallery />
-              <LanguageSwitcher />
               <Contact />
             </>
           }
@@ -64,6 +63,7 @@ function App() {
         <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
         <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore />} />
       </Routes>
+      <LanguageSwitcher />
       <Footer />
     </Router>
   );

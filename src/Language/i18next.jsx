@@ -59,7 +59,33 @@ const resources = {
       message: "Message",
       yourMessage: "Your Message",
       submit: "Submit",
-      ourLocation: "Our Location"
+      ourLocation: "Our Location",
+      // Counter
+      counterTitle: "Counter",
+      counterValue: "Current Value",
+      incrementCounter: "Increment Counter",
+      // Features More
+      featuresMoreTitle: "More Features",
+      featureMoreLable1: "Feature Label 1",
+      featureMoreText1: "Description for feature label 1.",
+      featureMoreLable2: "Feature Label 2",
+      featureMoreText2: "Description for feature label 2.",
+      featureMoreLable3: "Feature Label 3",
+      featureMoreText3: "Description for feature label 3.",
+      featureMoreLable4: "Feature Label 4",
+      featureMoreText4: "Description for feature label 4.",
+      // About More
+      aboutMoreTitle: "About Our Company",
+      aboutMoreDescription: "We are a company dedicated to providing the best services to our clients. Our mission is to deliver high-quality solutions that meet the needs of our customers.",
+      teamTitle: "Meet Our Team",
+      teamMember1Name: "John Doe",
+      teamMember1Role: "CEO",
+      teamMember1Description: "John is the CEO of our company and has over 20 years of experience in the industry.",
+      teamMember2Name: "Jane Smith",
+      teamMember2Role: "CTO",
+      teamMember2Description: "Jane is the CTO of our company and is responsible for overseeing all technical aspects.",
+      additionalInfoTitle: "Additional Information",
+      additionalInfoDescription: "Here you can add any additional information about your company, such as awards, achievements, and more."
     }
   },
   ru: {
@@ -118,7 +144,33 @@ const resources = {
       message: "Сообщение",
       yourMessage: "Ваше сообщение",
       submit: "Отправить",
-      ourLocation: "Наше местоположение"
+      ourLocation: "Наше местоположение",
+      // Counter
+      counterTitle: "Счетчик",
+      counterValue: "Текущее значение",
+      incrementCounter: "Увеличить счетчик",
+      // Features More
+      featuresMoreTitle: "Больше функций",
+      featureMoreLable1: "Метка функции 1",
+      featureMoreText1: "Описание метки функции 1.",
+      featureMoreLable2: "Метка функции 2",
+      featureMoreText2: "Описание метки функции 2.",
+      featureMoreLable3: "Метка функции 3",
+      featureMoreText3: "Описание метки функции 3.",
+      featureMoreLable4: "Метка функции 4",
+      featureMoreText4: "Описание метки функции 4.",
+      // About More
+      aboutMoreTitle: "О нашей компании",
+      aboutMoreDescription: "Мы компания, стремящаяся предоставлять лучшие услуги нашим клиентам. Наша миссия - предоставлять высококачественные решения, которые удовлетворяют потребности наших клиентов.",
+      teamTitle: "Наша команда",
+      teamMember1Name: "Джон Доу",
+      teamMember1Role: "Генеральный директор",
+      teamMember1Description: "Джон - генеральный директор нашей компании, имеющий более 20 лет опыта в отрасли.",
+      teamMember2Name: "Джейн Смит",
+      teamMember2Role: "Технический директор",
+      teamMember2Description: "Джейн - технический директор нашей компании, отвечающая за все технические аспекты.",
+      additionalInfoTitle: "Дополнительная информация",
+      additionalInfoDescription: "Здесь вы можете добавить любую дополнительную информацию о вашей компании, такую как награды, достижения и многое другое."
     }
   },
   et: {
@@ -177,7 +229,33 @@ const resources = {
       message: "Sõnum",
       yourMessage: "Teie sõnum",
       submit: "Esita",
-      ourLocation: "Meie asukoht"
+      ourLocation: "Meie asukoht",
+      // Counter
+      counterTitle: "Loendur",
+      counterValue: "Praegune väärtus",
+      incrementCounter: "Suurenda loendurit",
+      // Features More
+      featuresMoreTitle: "Rohkem funktsioone",
+      featureMoreLable1: "Funktsiooni silt 1",
+      featureMoreText1: "Funktsiooni sildi 1 kirjeldus.",
+      featureMoreLable2: "Funktsiooni silt 2",
+      featureMoreText2: "Funktsiooni sildi 2 kirjeldus.",
+      featureMoreLable3: "Funktsiooni silt 3",
+      featureMoreText3: "Funktsiooni sildi 3 kirjeldus.",
+      featureMoreLable4: "Funktsiooni silt 4",
+      featureMoreText4: "Funktsiooni sildi 4 kirjeldus.",
+      // About More
+      aboutMoreTitle: "Meie ettevõttest",
+      aboutMoreDescription: "Oleme ettevõte, mis on pühendunud parimate teenuste pakkumisele oma klientidele. Meie missioon on pakkuda kvaliteetseid lahendusi, mis vastavad meie klientide vajadustele.",
+      teamTitle: "Tutvuge meie meeskonnaga",
+      teamMember1Name: "John Doe",
+      teamMember1Role: "Tegevjuht",
+      teamMember1Description: "John on meie ettevõtte tegevjuht ja tal on üle 20-aastane kogemus tööstuses.",
+      teamMember2Name: "Jane Smith",
+      teamMember2Role: "Tehnoloogiajuht",
+      teamMember2Description: "Jane on meie ettevõtte tehnoloogiajuht ja vastutab kõigi tehniliste aspektide eest.",
+      additionalInfoTitle: "Lisainformatsioon",
+      additionalInfoDescription: "Siin saate lisada lisateavet oma ettevõtte kohta, näiteks auhinnad, saavutused ja palju muud."
     }
   }
 };

@@ -1,0 +1,19 @@
+.counter-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .counter-container h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .counter-container p {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .counter-container button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
