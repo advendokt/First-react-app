@@ -1,11 +1,30 @@
 .about-more-container {
-    padding: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    color: #333;
   }
   
   .company-info,
   .team-info,
   .additional-info {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+  }
+  
+  .company-info h1,
+  .team-info h2,
+  .additional-info h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #2374ab;
+  }
+  
+  .company-info p,
+  .team-info p,
+  .additional-info p {
+    font-size: 1.2em;
+    line-height: 1.6;
   }
   
   .company-image,
@@ -13,22 +32,47 @@
     width: 100%;
     height: auto;
     margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .team-member {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .team-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
   }
   
   .team-details {
-    margin-left: 20px;
+    flex: 1;
   }
   
   .team-details h3 {
     margin: 0;
+    font-size: 1.8em;
+    color: #2374ab;
   }
   
-  .team-details p {
-    margin: 5px 0;
+  .team-details .role {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .additional-info h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #2374ab;
+  }
+  
+  .additional-info p {
+    font-size: 1.2em;
+    line-height: 1.6;
   }
