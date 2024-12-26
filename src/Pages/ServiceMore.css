@@ -1,0 +1,14 @@
+#popularTopics .card {
+    transition: transform 0.3s ease;
+  }
+  
+  #popularTopics .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  #popularTopics h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+  }
+  

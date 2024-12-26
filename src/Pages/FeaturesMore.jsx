@@ -1,53 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import './FeaturesMore.css'; // Import the CSS file for styles
+import './FeaturesMore.css';
 
 const FeaturesMore = () => {
   const { t } = useTranslation();
   const [counter, setCounter] = useState(0);
 
-  // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 1200, // Animation duration in milliseconds
-      offset: 200, // Offset from the trigger point
-      easing: 'ease-in-out', // Easing function for animations
-      once: true, // Animation happens only once
+      duration: 1200,
+      offset: 200,
+      easing: 'ease-in-out',
+      once: true,
     });
   }, []);
 
-  const incrementCounter = () => {
-    setCounter(counter + 1);
-  };
+  const incrementCounter = useCallback(() => setCounter(prev => prev + 1), []);
+
+  const featureData = [
+    { label: t('featureMoreLable1'), text: t('featureMoreText1'), animation: 'fade-right' },
+    { label: t('featureMoreLable2'), text: t('featureMoreText2'), animation: 'fade-left' },
+    { label: t('featureMoreLable3'), text: t('featureMoreText3'), animation: 'fade-right' },
+    { label: t('featureMoreLable4'), text: t('featureMoreText4'), animation: 'fade-left' },
+  ];
 
   return (
     <div id='featuresMore' className='container px-4 py-5'>
-      <h2 className='pb-2 border-bottom container px-4 py-5' data-aos="fade-down">{t('featuresMoreTitle')}</h2>
+      <h2 className='pb-2 border-bottom' data-aos="fade-down">{t('featuresMoreTitle')}</h2>
       <div className='row'>
-        <div className='col-lg-6 mb-5'>
-          <div className='col p-3' data-aos="fade-right">
-            <h3>{t('featureMoreLable1')}</h3>
-            <p>{t('featureMoreText1')}</p>
-            {/* Maybe place for IMG in design */}
+        {featureData.map((feature, index) => (
+          <div key={index} className='col p-3' data-aos={feature.animation}>
+            <h3>{feature.label}</h3>
+            <p>{feature.text}</p>
           </div>
-          <div className='col p-3' data-aos="fade-left">
-            <h3>{t('featureMoreLable2')}</h3>
-            <p>{t('featureMoreText2')}</p>
-            {/* Maybe place for IMG in design */}
-          </div>
-          <div className='col p-3' data-aos="fade-right">
-            <h3>{t('featureMoreLable3')}</h3>
-            <p>{t('featureMoreText3')}</p>
-            {/* Maybe place for IMG in design */}
-          </div>
-          <div className='col p-3' data-aos="fade-left">
-            <h3>{t('featureMoreLable4')}</h3>
-            <p>{t('featureMoreText4')}</p>
-            {/* Maybe place for IMG in design */}
-          </div>
-        </div>
+        ))}
       </div>
       <div className='counter-container'>
         <h3>{t('counterTitle')}</h3>

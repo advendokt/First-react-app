@@ -1,29 +1,31 @@
 import React, { useEffect } from 'react';
 import './Features.css';
 import { FaCogs, FaTachometerAlt, FaTable } from 'react-icons/fa';
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS CSS
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Features() {
-  const { t } = useTranslation(); // Initialize translation function
-  const navigate = useNavigate(); // Initialize navigate function
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 1200, // Animation duration in milliseconds
-      offset: 200, // Offset from the trigger point
-      easing: 'ease-in-out', // Easing function for animations
-      once: true, // Animation happens only once
+      duration: 1200,
+      offset: 200,
+      easing: 'ease-in-out',
+      once: true,
     });
   }, []);
 
-  // Button click handler to navigate to /features-more
-  const handleNavigate = () => {
-    navigate('/features-more'); // Navigate to the FeaturesMore page
-  };
+  const featureData = [
+    { icon: <FaTable />, title: 'featuredTitle1', description: 'featuredDescription1', aos: 'flip-left' },
+    { icon: <FaCogs />, title: 'featuredTitle2', description: 'featuredDescription2', aos: 'zoom-in' },
+    { icon: <FaTachometerAlt />, title: 'featuredTitle3', description: 'featuredDescription3', aos: 'fade-left' },
+  ];
+
+  const handleNavigate = () => navigate('/features-more');
 
   return (
     <div id="features" className="px-4 py-5" data-aos="fade-up">
@@ -32,46 +34,21 @@ function Features() {
       <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
         <div className="col d-flex flex-column align-items-start gap-2" data-aos="fade-right">
           <h2 className="fw-bold text-body-emphasis">{t('titleDescription')}</h2>
-          <p className="text-body-secondary">
-            {t('paragraphDescription')}
-          </p>
-          {/* Button that triggers navigation */}
-          <button className="btn btn-primary btn-lg" onClick={handleNavigate}>
-            {t('goToFeaturesMore')}
-          </button>
+          <p className="text-body-secondary">{t('paragraphDescription')}</p>
+          <button className="btn btn-primary btn-lg" onClick={handleNavigate}>{t('goToFeaturesMore')}</button>
         </div>
 
         <div className="col">
           <div className="row row-cols-1 row-cols-sm-2 g-4">
-            <div className="col d-flex flex-column gap-2" data-aos="flip-left">
-              <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                <FaTable />
+            {featureData.map(({ icon, title, description, aos }, index) => (
+              <div className="col d-flex flex-column gap-2" key={index} data-aos={aos}>
+                <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                  {icon}
+                </div>
+                <h4 className="fw-semibold mb-0 text-body-emphasis">{t(title)}</h4>
+                <p className="text-body-secondary">{t(description)}</p>
               </div>
-              <h4 className="fw-semibold mb-0 text-body-emphasis">{t('featuredTitle1')}</h4>
-              <p className="text-body-secondary">
-                {t('featuredDescription1')}
-              </p>
-            </div>
-
-            <div className="col d-flex flex-column gap-2" data-aos="zoom-in">
-              <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                <FaCogs />
-              </div>
-              <h4 className="fw-semibold mb-0 text-body-emphasis">{t('featuredTitle2')}</h4>
-              <p className="text-body-secondary">
-                {t('featuredDescription2')}
-              </p>
-            </div>
-
-            <div className="col d-flex flex-column gap-2" data-aos="fade-left">
-              <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                <FaTachometerAlt />
-              </div>
-              <h4 className="fw-semibold mb-0 text-body-emphasis">{t('featuredTitle3')}</h4>
-              <p className="text-body-secondary">
-                {t('featuredDescription3')}
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </div>

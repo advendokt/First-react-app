@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Импортируем компоненты
 import Header from './components/Header';
 import Footer from './components/Footer';
-import LanguageSwitcher from './hook/LanguageSwitcher';
+import LanguageSwitcher from './Language/LanguageSwitcher';
 import ROUTES from './constants/Routes'; // Убедись, что путь правильный
 
 // Страницы

@@ -1,69 +1,56 @@
-.carousel-caption {
+.carousel-img {
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    object-fit: cover; /* Ensure the image covers the entire area */
+  }
+  
+  .carousel-caption {
     position: absolute;
     top: 50%;
     left: 50%;
-    text-align: center;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-}
-/* Customize transition speed */
-.carousel-item {
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .carousel-item {
+    position: relative;
     transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
-}
-
-.dark-overlay {
+  }
+  
+  .dark-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Настройте прозрачность */
-    z-index: 1; /* Помещаем поверх изображения */
-}
-
-/* Контент поверх слоя */
-.carousel-caption {
-    position: relative;
-    z-index: 2; /* Поднимаем текст поверх затемнения */
-    
-}
-
-.carousel-caption h5 {
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+  
+  .carousel-caption h5,
+  .carousel-caption p {
+    color: #fff; /* Ensure the text is white for better readability */
+  }
+  
+  .carousel-caption h5 {
     font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-.carousel-caption p {
-    font-size: 1.5rem;
-    color: #fff;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-.carousel-item img {
-    width: 100%; /* Ensure it fills the container */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Fill the container without stretching */
-    max-height: 100vh; /* Limit height to 75% of viewport */
-}
-
-@media (max-width: 768px) {
-    /* For mobile devices, adjust the image to landscape orientation */
-    .carousel-item img {
-        object-fit: cover; /* Make sure it covers the container */
-        width: 100%; /* Full width */
-        height: auto; /* Maintain aspect ratio */
-        max-height: 50vh; /* Lower the max height to fit smaller screens */
+  }
+  
+  .carousel-caption p {
+    font-size: 1.25rem;
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-caption h5 {
+      font-size: 1.5rem;
     }
-}
-
-@media (max-width: 480px) {
-    /* For very small screens (portrait mode) */
-    .carousel-item img {
-        object-fit: cover; /* Make sure it covers the container */
-        width: 100%; /* Full width */
-        height: auto; /* Maintain aspect ratio */
-        max-height: 60vh; /* Lower the max height to fit smaller screens */
+  
+    .carousel-caption p {
+      font-size: 1rem;
     }
-}
+  }
