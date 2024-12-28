@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';  // <-- Add this line
 
 // Импортируем компоненты
 import Header from './components/Header';
@@ -17,15 +18,21 @@ import About from './components/About';
 import Service from './components/Service';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
+import WhyUs from './Pages/WhyUs.jsx';
+
+import Login from './admin/Login'; // Import login from the admin folder
+import AdminPanel from './admin/AdminPanel'; // Import the AdminPanel as well
+
+
 
 // Анимация загрузки
 import Loading from './components/Loading';
 
- // Импорт стилей
+// Импорт стилей
 import './App.css';
-import WhyUs from './Pages/WhyUs.jsx';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Эмуляция загрузки
@@ -64,6 +71,11 @@ function App() {
         <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
         <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore />} />
         <Route path={ROUTES.WHY_US} element={<WhyUs />} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        
+        {/* Protected Route (Admin Panel) */}
+        <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
+
       </Routes>
       <LanguageSwitcher />
       <Footer />

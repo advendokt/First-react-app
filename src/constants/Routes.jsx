@@ -5,6 +5,8 @@ const ROUTES = {
     SERVICES_MORE: '/services-more',
     ANONCMENTC_MORE: '/anoncmentc',
     WHY_US: '/why-us',
+    LOGIN: '/login',
+    ADMIN: '/admin-panel',
     
   };
   
