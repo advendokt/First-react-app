@@ -23,6 +23,7 @@ import Loading from './components/Loading';
 
  // Импорт стилей
 import './App.css';
+import WhyUs from './Pages/WhyUs.jsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -62,6 +63,7 @@ function App() {
         <Route path={ROUTES.FEATURES_MORE} element={<FeaturesMore />} />
         <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
         <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore />} />
+        <Route path={ROUTES.WHY_US} element={<WhyUs />} />
       </Routes>
       <LanguageSwitcher />
       <Footer />

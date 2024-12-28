@@ -1,0 +1,40 @@
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h1.display-4 {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  
+  .img-fluid {
+    border-radius: 10px;
+  }
+  
+  button.btn-lg {
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+  
