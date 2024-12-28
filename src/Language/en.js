@@ -88,7 +88,26 @@ const en = {
       teamMember2Role: "CTO",
       teamMember2Description: "Jane is the CTO of our company and oversees all technical operations, ensuring our products remain at the forefront of innovation.",
       additionalInfoTitle: "Additional Information",
-      additionalInfoDescription: "Here you can add any extra information about your company, such as awards, notable achievements, and recognition in the industry."
+      additionalInfoDescription: "Here you can add any extra information about your company, such as awards, notable achievements, and recognition in the industry.",
+      title: "Why Choose Us",
+      description: "At [Company Name], we pride ourselves on delivering exceptional service, innovative solutions, and an unwavering focus on customer satisfaction. Discover why we are the preferred choice for countless clients worldwide.",
+      expertTeam: "Expert Team",
+      expertTeamDesc: "Our team consists of experienced professionals dedicated to delivering top-notch services in every project we undertake.",
+      expertTeamDetail: "With decades of collective experience, we ensure that your needs are met with precision and efficiency.",
+      innovativeSolutions: "Innovative Solutions",
+      innovativeSolutionsDesc: "We leverage cutting-edge technology and creativity to provide solutions that set new industry standards.",
+      innovativeSolutionsDetail: "From AI-driven analytics to custom-tailored software, we help businesses achieve their goals faster and smarter.",
+      customerFocus: "Customer Focus",
+      customerFocusDesc: "Your satisfaction is at the heart of everything we do. We are committed to exceeding your expectations.",
+      customerFocusDetail: "With a dedicated support team available 24/7, we ensure your experience is seamless and hassle-free.",
+      unmatchedQuality: "Unmatched Quality",
+      unmatchedQualityDesc: "We uphold the highest standards in every project, ensuring that our solutions are not only effective but also sustainable.",
+      valueProposition: "Our Value Proposition",
+      valuePropositionDesc: "We combine expertise, technology, and dedication to offer unparalleled value to our clients.",
+      commitmentExcellence: "Commitment to Excellence",
+      sustainablePractices: "Sustainable Practices",
+      transparentCommunication: "Transparent Communication",
+      learnMore: "Learn More",
     }
 };
 

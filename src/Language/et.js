@@ -88,7 +88,27 @@ const et = {
         teamMember2Role: "Tehniline direktor",
         teamMember2Description: "Jane on meie tehniline direktor, vastutades kõigi tehniliste operatsioonide eest.",
         additionalInfoTitle: "Täiendav teave",
-        additionalInfoDescription: "Lisage siin täiendavat teavet oma ettevõtte kohta, nagu auhinnad, tunnustused või saavutused tööstuses."
+        additionalInfoDescription: "Lisage siin täiendavat teavet oma ettevõtte kohta, nagu auhinnad, tunnustused või saavutused tööstuses.",
+        title: "Miks valida meid",
+        description: "[Company Name] uhkustab erakordse teenuse, uuenduslike lahenduste ja vankumatu keskendumisega kliendirahulolule. Avastage, miks meid eelistavad lugematud kliendid üle kogu maailma.",
+        expertTeam: "Ekspertide meeskond",
+        expertTeamDesc: "Meie meeskond koosneb kogenud professionaalidest,cm kes on pühendunud tipptasemel teenuste pakkumisele igas projektis, mida me ette võtame.",
+        expertTeamDetail: "Kümnendite pikkuse kollektiivse kogemusega tagame, et teie vajadused rahuldatakse täpsuse ja tõhususega.",
+        innovativeSolutions: "Uuenduslikud lahendused",
+        innovativeSolutionsDesc: "Kasutame tipptasemel tehnoloogiat ja loovust, et pakkuda lahendusi, mis seavad uusi tööstusstandardeid.",
+        innovativeSolutionsDetail: "Alates AI-põhisest analüütikast kuni kohandatud tarkvarani aitame ettevõtetel saavutada oma eesmärke kiiremini ja targemalt.",
+        customerFocus: "Kliendikesksus",
+        customerFocusDesc: "Teie rahulolu on kõiges, mida me teeme, keskmes. Oleme pühendunud teie ootuste ületamisele.",
+        customerFocusDetail: "Pühendunud tugimeeskonnaga, mis on saadaval 24/7, tagame, et teie kogemus on sujuv ja probleemivaba.",
+        unmatchedQuality: "Võrratu kvaliteet",
+        unmatchedQualityDesc: "Peame igas projektis kinni kõrgeimatest standarditest, tagades, et meie lahendused on mitte ainult tõhusad, vaid ka jätkusuutlikud.",
+        valueProposition: "Meie väärtuspakkumine",
+        valuePropositionDesc: "Kombineerime teadmised, tehnoloogia ja pühendumuse, et pakkuda oma klientidele ületamatut väärtust.",
+        commitmentExcellence: "Pühendumus tipptasemele",
+        sustainablePractices: "Jätkusuutlikud tavad",
+        transparentCommunication: "Läbipaistev suhtlus",
+        learnMore: "Loe rohkem"
+
     }
 };
 
