@@ -4,9 +4,24 @@ import 'aos/dist/aos.css';
 import './WhyUs.css'; // Custom CSS file
 import { useTranslation } from 'react-i18next';
 
-const WhyUs = () => {
+// Reusable Card Component
+const Card = ({ icon, titleKey, descriptionKey, detailKey, aosDelay, t }) => {
+  return (
+    <div className="col-md-4" data-aos="zoom-in" data-aos-delay={aosDelay}>
+      <div className="card shadow-sm">
+        <div className="card-body text-center">
+          <i className={`bi ${icon} display-3 text-primary mb-3`}></i>
+          <h5 className="card-title">{t(titleKey)}</h5>
+          <p className="card-text">{t(descriptionKey)}</p>
+          <p className="text-muted small">{t(detailKey)}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-  const { t } = useTranslation(); // This is enough to access translations
+const WhyUs = () => {
+  const { t } = useTranslation();  // t is the function to access translation
   const [language, setLanguage] = useState('en');
 
   useEffect(() => {
@@ -22,43 +37,36 @@ const WhyUs = () => {
           <option value="et">Eesti</option>
         </select>
       </div>
+
       <h1 className="text-center display-4 mb-4 mt-5 text-primary">{t('title')}</h1>
       <p className="text-center lead mb-5 text-muted">{t('description')}</p>
 
       {/* Cards Section */}
       <div className="row g-4">
-        <div className="col-md-4" data-aos="zoom-in">
-          <div className="card shadow-sm">
-            <div className="card-body text-center">
-              <i className="bi bi-people-fill display-3 text-primary mb-3"></i>
-              <h5 className="card-title">{t('expertTeam')}</h5>
-              <p className="card-text">{t('expertTeamDesc')}</p>
-              <p className="text-muted small">{t('expertTeamDetail')}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-          <div className="card shadow-sm">
-            <div className="card-body text-center">
-              <i className="bi bi-lightbulb-fill display-3 text-success mb-3"></i>
-              <h5 className="card-title">{t('innovativeSolutions')}</h5>
-              <p className="card-text">{t('innovativeSolutionsDesc')}</p>
-              <p className="text-muted small">{t('innovativeSolutionsDetail')}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4" data-aos="zoom-in" data-aos-delay="400">
-          <div className="card shadow-sm">
-            <div className="card-body text-center">
-              <i className="bi bi-hand-thumbs-up-fill display-3 text-warning mb-3"></i>
-              <h5 className="card-title">{t('customerFocus')}</h5>
-              <p className="card-text">{t('customerFocusDesc')}</p>
-              <p className="text-muted small">{t('customerFocusDetail')}</p>
-            </div>
-          </div>
-        </div>
+        <Card
+          icon="bi-people-fill"
+          titleKey="expertTeam"
+          descriptionKey="expertTeamDesc"
+          detailKey="expertTeamDetail"
+          aosDelay="0"
+          t={t}
+        />
+        <Card
+          icon="bi-lightbulb-fill"
+          titleKey="innovativeSolutions"
+          descriptionKey="innovativeSolutionsDesc"
+          detailKey="innovativeSolutionsDetail"
+          aosDelay="200"
+          t={t}
+        />
+        <Card
+          icon="bi-hand-thumbs-up-fill"
+          titleKey="customerFocus"
+          descriptionKey="customerFocusDesc"
+          detailKey="customerFocusDetail"
+          aosDelay="400"
+          t={t}
+        />
       </div>
 
       {/* Additional Section */}
