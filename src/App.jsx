@@ -9,7 +9,7 @@ import Banner from './components/Banner';
 import Features from './components/Features';
 import About from './components/About';
 import Service from './components/Service';
-import Gallery from './components/Gallery';;
+import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import WhyUs from './Pages/WhyUs.jsx';
 import FeaturesMore from './Pages/FeaturesMore.jsx';
@@ -29,10 +29,15 @@ const App = () => {
   const [servicesmore, setServicesmore] = useState([]);
   const [error, setError] = useState('');
 
+  // Загрузка сервисов с сервера
   useEffect(() => {
-    // Fetch services from backend
     fetch('http://localhost:5001/services')
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch services');
+        }
+        return response.json();
+      })
       .then((data) => {
         setServicesmore(data);
       })
@@ -45,6 +50,7 @@ const App = () => {
       });
   }, []);
 
+  // Добавление нового сервиса
   const addService = (service) => {
     fetch('http://localhost:5001/services', {
       method: 'POST',
@@ -53,23 +59,30 @@ const App = () => {
       },
       body: JSON.stringify(service),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((newService) => {
-        setServicesmore([...servicesmore, newService]);
+        setServicesmore((prevServices) => [...prevServices, newService]);
       })
       .catch((error) => {
         console.error('Error adding service:', error);
         setError('Failed to add service');
       });
   };
-  
 
-
+  // Удаление сервиса
   const removeService = (id) => {
     fetch(`http://localhost:5001/services/${id}`, {
       method: 'DELETE',
     })
-      .then(() => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         setServicesmore((prevServices) =>
           prevServices.filter((service) => service.id !== id)
         );
@@ -79,7 +92,6 @@ const App = () => {
         setError('Failed to delete service');
       });
   };
-  
 
   if (loading) {
     return <Loading />;
@@ -90,32 +102,51 @@ const App = () => {
       <Header />
       {error && <div className="error">{error}</div>}
       <Routes>
-        <Route path={ROUTES.HOME} element={
-          <>
-            <Banner />
-            <Features />
-            <About />
-            <Service />
-            <Gallery />
-            <Contact />
-          </>
-        } />
-
+        <Route
+          path={ROUTES.HOME}
+          element={
+            <>
+              <Banner />
+              <Features />
+              <About />
+              <Service />
+              <Gallery />
+              <Contact />
+            </>
+          }
+        />
+        <Route path="/services/:id" element={<ServiceMore />} />
         <Route path={ROUTES.FEATURES_MORE} element={<FeaturesMore />} />
         <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
-        <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore servicesmore={servicesmore} />} />
+        <Route
+          path={ROUTES.SERVICES_MORE}
+          element={<ServiceMore servicesmore={servicesmore} />}
+        />
+
         <Route path={ROUTES.WHY_US} element={<WhyUs />} />
-
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-
-        <Route path="/admin" element={isAuthenticated ? <AdminPanel servicesmore={servicesmore} addService={addService} removeService={removeService} /> : <Navigate to="/login" />} />
+        <Route
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/admin"
+          element={
+            isAuthenticated ? (
+              <AdminPanel
+                servicesmore={servicesmore}
+                addService={addService}
+                removeService={removeService}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
       </Routes>
-
       <LanguageSwitcher />
       <Footer />
     </Router>
   );
 };
-
 
 export default App;

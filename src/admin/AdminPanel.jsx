@@ -49,6 +49,7 @@ const AdminPanel = ({ servicesmore, addService, removeService }) => {
         <h3>Current Services</h3>
         <ul>
           {servicesmore.map((service) => (
+            // Ensure service.id is unique
             <li key={service.id}>
               <div>
                 <strong>{service.name}</strong>: {service.description}
@@ -59,6 +60,7 @@ const AdminPanel = ({ servicesmore, addService, removeService }) => {
           ))}
         </ul>
       </div>
+
     </div>
   );
 };

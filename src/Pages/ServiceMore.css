@@ -1,43 +1,59 @@
 /* ServiceMore.css */
 
-.service-more-container {
+/* Основной стиль для контейнера */
+.container {
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #f8f9fa; /* Цвет фона для контейнера */
+  border: 2px solid #007bff; /* Граница контейнера для видимости */
+  border-radius: 8px; /* Округление углов */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для выделения */
 }
 
-.service-more-header {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.service-more-description {
-  font-size: 1.2em;
-  line-height: 1.6;
-  color: #666;
-}
-
-.service-more-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.service-more-list-item {
-  background-color: #fff;
+/* Стиль для карточки */
+.card {
+  margin-top: 20px;
   border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.service-more-list-item:hover {
+/* Позиционирование картинки внутри карточки */
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* Стиль для текста в карточке */
+.card-body {
+  padding: 20px;
+}
+
+/* Стиль для футера карточки */
+.card-footer {
   background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
 }
 
-.service-more-footer {
-  margin-top: 30px;
+/* Уведомление о загрузке */
+.text-center {
+  font-size: 18px;
   text-align: center;
-  font-size: 1em;
-  color: #999;
+  padding: 20px;
+  color: #007bff;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
 }

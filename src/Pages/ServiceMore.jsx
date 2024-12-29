@@ -1,87 +1,60 @@
-// src/pages/ServiceMore.jsx
-
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Для получения параметра из URL
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useTranslation } from 'react-i18next';
+import './ServiceMore.css';
 
 const ServiceMore = () => {
-  const { id } = useParams(); // Получаем ID из URL
-  const { t } = useTranslation();
+  const { id } = useParams();  // Извлекаем id из URL
   const [service, setService] = useState(null);
-  const [error, setError] = useState(null);
-  const [newService, setNewService] = useState({ name: '', description: '' });
+  const [error, setError] = useState('');
 
-  // Загрузка данных о сервисе
   useEffect(() => {
+    // Запрос на получение информации о конкретной услуге
     const fetchService = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/services/${id}`);
+        const response = await axios.get(`http://localhost:5001/services/${id}`);
+        console.log('Fetched service:', response.data);  // Для отладки
         setService(response.data);
       } catch (err) {
-        setError(t('serviceNotFound'));
-        console.error('Error fetching service:', err);
+        setError('Error fetching service');
+        console.error(err);
       }
     };
 
-    fetchService();
+    if (id) {
+      fetchService();
+    }
   }, [id]);
 
-  // Обработчик добавления нового сервиса
-  const handleAddService = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/services', newService);
-      setService(response.data);
-      setNewService({ name: '', description: '' });
-    } catch (err) {
-      setError('Error adding service');
-    }
-  };
-
-  // Обработчик удаления сервиса
-  const handleDeleteService = async () => {
-    try {
-      await axios.delete(`http://localhost:5000/services/${id}`);
-      setService(null);
-      setError('Service deleted');
-    } catch (err) {
-      setError('Error deleting service');
-    }
-  };
-
   if (error) {
-    return <div>{error}</div>;
+    return <div className="alert alert-danger">{error}</div>;
   }
 
   if (!service) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;  // Пока данные загружаются
   }
 
   return (
-    <div className="container py-5">
-      <h1>{service.name}</h1>
-      <p>{service.description}</p>
-
-      {/* Добавление нового сервиса */}
-      <form onSubmit={handleAddService}>
-        <input
-          type="text"
-          placeholder="Service Name"
-          value={newService.name}
-          onChange={(e) => setNewService({ ...newService, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Service Description"
-          value={newService.description}
-          onChange={(e) => setNewService({ ...newService, description: e.target.value })}
-        />
-        <button type="submit">Add Service</button>
-      </form>
-
-      {/* Кнопка для удаления сервиса */}
-      <button onClick={handleDeleteService} className="btn btn-danger">Delete Service</button>
+    <div className="container mt-4">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <div className="card shadow-sm">
+            <img
+              src={service.image || 'https://via.placeholder.com/400x300'}
+              className="card-img-top"
+              alt={service.name}
+            />
+            <div className="card-body">
+              <h2 className="card-title">{service.name}</h2>
+              <p className="card-text">{service.description}</p>
+              <p className="card-text"><strong>Price:</strong> ${service.price}</p>
+            </div>
+            <div className="card-footer text-muted">
+              <small>Service ID: {service.id}</small>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
