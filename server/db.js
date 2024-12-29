@@ -1,18 +1,19 @@
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'admin',  // или другой пользователь
-  password: '12345678',  // пароль для пользователя
-  database: 'my_database'  // имя базы данных
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('Ошибка подключения к базе данных: ', err);
-  } else {
-    console.log('Успешно подключено к базе данных!');
+const connectDB = async () => {
+  try {
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'yourusername',
+      password: 'yourpassword',
+      database: 'yourdbname',
+    });
+    console.log('Database connected successfully');
+    return connection;
+  } catch (err) {
+    console.error('Database connection failed:', err.message);
+    process.exit(1);
   }
-});
+};
 
-export default db;
+export default connectDB;

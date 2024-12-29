@@ -31,37 +31,69 @@ function App() {
   // Получение данных с сервера
   useEffect(() => {
     fetch('http://localhost:3000/api/services')
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => {
+        console.log('Fetched services:', data); // Log the fetched data for debugging
         setServicesmore(data);
         setLoading(false); // Set loading to false after data is fetched
       })
       .catch((error) => {
         console.error('Error fetching services:', error);
+        console.error('Error details:', error.message, error.stack);
         setLoading(false); // Set loading to false even if there is an error
       });
   }, []);
 
-  const addService = (service) => {
-    fetch('http://localhost:3000/api/services', {
+  const addService = (service, file) => {
+    const formData = new FormData();
+    formData.append('name', service.name);
+    formData.append('description', service.description);
+    formData.append('price', service.price);
+    if (file) {
+      formData.append('image', file); // Append the image file only if it exists
+    }
+
+    console.log('Form data:', service, file); // Log the form data for debugging
+
+    fetch('http://localhost:3000/api/services', { // Ensure the port matches the server port
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(service),
+      body: formData,
     })
-      .then((response) => response.json())
-      .then((newService) => {
-        setServicesmore([...servicesmore, newService]);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
       })
-      .catch((error) => console.error('Error adding service:', error));
+      .then((newService) => {
+        console.log('Added service:', newService); // Log the added service for debugging
+        setServicesmore([...servicesmore, newService.service]);
+      })
+      .catch((error) => {
+        console.error('Error adding service:', error);
+        alert(`Error adding service: ${error.message}`);
+      });
   };
 
   const removeService = (id) => {
+    if (!id) {
+      console.error('Service ID is undefined');
+      return;
+    }
+
     fetch(`http://localhost:3000/api/services/${id}`, {
       method: 'DELETE',
     })
-      .then(() => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        console.log('Deleted service ID:', id); // Log the deleted service ID for debugging
         setServicesmore(servicesmore.filter((service) => service.id !== id));
       })
       .catch((error) => console.error('Error deleting service:', error));

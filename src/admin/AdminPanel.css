@@ -1,24 +1,28 @@
 /* Общие стили для админ панели */
+
 .admin-panel {
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #f8f9fa;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .admin-panel h2 {
     font-size: 2rem;
     color: #333;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .error {
     background-color: #ffcccc;
-    color: #ff0000;
+    color: red;
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 5px;
     width: 100%;
     text-align: center;
@@ -31,7 +35,17 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+}
+
+.add-service-form h3 {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.add-service-form form {
+    display: flex;
+    flex-direction: column;
 }
 
 .add-service-form input,
@@ -39,22 +53,24 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    font-size: 1rem;
 }
 
 .add-service-form button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .add-service-form button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 /* Стили для списка сервисов */
@@ -64,6 +80,12 @@
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.services-list h3 {
+    margin-bottom: 15px;
+    color: #555;
 }
 
 .services-list ul {
@@ -74,24 +96,47 @@
 .services-list li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    align-items: center;
+    margin-bottom: 10px;
     padding: 10px;
-    background-color: #fafafa;
+    background-color: white;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.services-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.services-list .service-price {
+    font-weight: bold;
+    color: #007bff;
+    margin-left: 20px;
 }
 
 .services-list button {
-    background-color: #ff4d4d;
+    background-color: #dc3545;
     border: none;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .services-list button:hover {
-    background-color: #ff2a2a;
+    background-color: #c82333;
 }
 
 /* Стиль для цены */

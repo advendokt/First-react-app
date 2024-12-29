@@ -1,11 +1,13 @@
 import express from 'express';
-import { getServices, getServiceById, addService, deleteService } from '../controllers/serviceController.js';
+import { getServices, fetchServiceById, createService, removeService } from '../controllers/serviceController.js';
+import multer from 'multer';
 
 const router = express.Router();
+const upload = multer({ dest: 'uploads/' });
 
 router.get('/services', getServices);
-router.get('/services/:id', getServiceById);
-router.post('/services', addService);
-router.delete('/services/:id', deleteService);
+router.get('/services/:id', fetchServiceById);
+router.post('/services', upload.single('image'), createService); // Use upload.single('image') to handle optional image uploads
+router.delete('/services/:id', removeService);
 
 export default router;

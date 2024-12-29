@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ServiceMore.css';
 
-const ServiceMore = () => {
-  const [services, setServices] = useState([]);
+const ServiceMore = ({ servicesmore }) => {
+  const [services, setServices] = useState(servicesmore);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const ServiceMore = () => {
           <div key={service.id} className="col-md-4">
             <div className="card shadow-sm mb-4">
               <img
-                src={service.image || 'https://via.placeholder.com/400x300'}
+                src={service.image ? `http://localhost:3000${service.image}` : 'https://via.placeholder.com/400x300'}
                 className="card-img-top"
                 alt={service.name}
               />

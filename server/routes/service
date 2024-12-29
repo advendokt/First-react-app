@@ -1,0 +1,12 @@
+import express from 'express';
+import { getServices, getServiceById, addServiceController, deleteServiceController } from '../controllers/serviceController.js';
+import multer from 'multer';
+
+const router = express.Router();
+
+router.get('/services', getServices);
+router.get('/services/:id', getServiceById);
+router.post('/services', addServiceController); // Now uses the controller for adding a service
+router.delete('/services/:id', deleteServiceController);
+
+export default router;

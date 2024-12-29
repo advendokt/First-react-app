@@ -5,6 +5,7 @@ import './AdminPanel.css';
 
 const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
   const [newService, setNewService] = useState({ name: '', description: '', price: '' });
+  const [image, setImage] = useState(null);
   const [error, setError] = useState('');
 
   // Удаляем дублирующиеся сервисы
@@ -16,11 +17,26 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
   const handleAddService = async (e) => {
     e.preventDefault();
     if (newService.name && newService.description && newService.price) {
+      const formData = new FormData();
+      formData.append('name', newService.name);
+      formData.append('description', newService.description);
+      formData.append('price', newService.price);
+      if (image) {
+        formData.append('image', image); // Ensure the field name matches the server-side code
+      }
+
+      console.log('Form data:', newService, image); // Log the form data for debugging
+
       try {
-        const response = await axios.post('http://localhost:3000/api/services', newService);
+        const response = await axios.post('http://localhost:3000/api/services', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
         setNewService({ name: '', description: '', price: '' });
+        setImage(null);
         setError('');
-        setServicesmore([...servicesmore, response.data]); // Update the services list
+        setServicesmore([...servicesmore, response.data.service]); // Update the services list
         console.log('Service added:', response.data);
       } catch (err) {
         setError('Error adding service');
@@ -56,6 +72,10 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
             value={newService.price}
             onChange={(e) => setNewService({ ...newService, price: e.target.value })}
           />
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
           <button type="submit">Add Service</button>
         </form>
       </div>
@@ -69,7 +89,7 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
                 <strong>{service.name}</strong>: {service.description}
                 <span className="service-price">${service.price}</span>
               </div>
-              <button onClick={() => removeService(service.id)}>Delete</button>
+              <button onClick={() => removeService(service.id)}>Delete</button> {/* Ensure the id is passed correctly */}
             </li>
           ))}
         </ul>
