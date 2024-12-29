@@ -1,42 +1,53 @@
-import db from '../server/db.js';  // Используйте точку для текущей папки
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
+// Создаем приложение Express
+const app = express();
 
+// Middleware
+app.use(cors()); // Разрешаем кросс-доменные запросы
+app.use(bodyParser.json()); // Парсим JSON в теле запроса
 
-// Получить все сервисы
-export const getServices = (req, res) => {
-  db.query('SELECT * FROM services', (err, results) => {
-    if (err) {
-      return res.status(500).json({ message: 'Ошибка при получении сервисов' });
-    }
-    res.json(results);
-  });
-};
+// Массив для хранения данных сервисов (имитация базы данных)
+let services = [
+  { id: 1, name: 'Service 1', description: 'Description 1', price: 100 },
+  { id: 2, name: 'Service 2', description: 'Description 2', price: 200 },
+];
 
-// Добавить новый сервис
-export const addService = (req, res) => {
-  const { name, description } = req.body;
-  db.query(
-    'INSERT INTO services (name, description) VALUES (?, ?)',
-    [name, description],
-    (err, results) => {
-      if (err) {
-        return res.status(500).json({ message: 'Ошибка при добавлении сервиса' });
-      }
-      res.status(201).json({ id: results.insertId, name, description });
-    }
-  );
-};
+// Возвращаем список всех сервисов
+app.get('/api/services', (req, res) => {
+  res.json(services);
+});
 
-// Удалить сервис
-export const deleteService = (req, res) => {
+// Добавляем новый сервис
+app.post('/api/services', (req, res) => {
+  const { name, description, price } = req.body;
+
+  // Проверка на наличие обязательных полей
+  if (!name || !description || !price) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  const newService = { id: services.length + 1, name, description, price };
+  services.push(newService);
+  res.status(201).json(newService);
+});
+
+// Удаляем сервис по ID
+app.delete('/api/services/:id', (req, res) => {
   const { id } = req.params;
-  db.query('DELETE FROM services WHERE id = ?', [id], (err, results) => {
-    if (err) {
-      return res.status(500).json({ message: 'Ошибка при удалении сервиса' });
-    }
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ message: 'Сервис не найден' });
-    }
-    res.json({ message: 'Сервис успешно удален' });
-  });
-};
+  const serviceIndex = services.findIndex(service => service.id === parseInt(id));
+
+  if (serviceIndex === -1) {
+    return res.status(404).json({ error: 'Service not found' });
+  }
+
+  services.splice(serviceIndex, 1);
+  res.status(200).send();
+});
+
+// Запуск сервера
+app.listen(5000, () => {
+  console.log('Server running on http://localhost:5000');
+});

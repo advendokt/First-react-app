@@ -1,85 +1,90 @@
-import React, { useState } from 'react';
-import './AdminPanel.css'; // Добавим файл стилей для панели администратора
+// src/admin/AdminPanel.jsx
 
-const AdminPanel = ({ servicesmore, addService, removeService }) => {
-  const [newService, setNewService] = useState({ name: '', description: '', price: '' });
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewService((prevService) => ({ ...prevService, [name]: value }));
-  };
+const AdminPanel = () => {
+  const [services, setServices] = useState([]);
+  const [newService, setNewService] = useState({ name: '', description: '' });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newService.name && newService.description && newService.price) {
-      addService(newService);
-      setNewService({ name: '', description: '', price: '' }); // Clear form
-    }
-  };
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate('/login');
+      }
+    }, [isAuthenticated, navigate]);
 
-  return (
-    <div className="admin-panel">
-      <h2 className="admin-title">Admin Panel</h2>
+    // Загрузка сервисов с сервера
+    useEffect(() => {
+      const fetchServices = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/services');
+          setServices(response.data);
+        } catch (err) {
+          setError('Error loading services');
+        }
+      };
+      fetchServices();
+    }, []);
 
-      {/* Add Service Form */}
-      <form className="add-service-form" onSubmit={handleSubmit}>
-        <h3>Add New Service</h3>
-        <div className="input-group">
-          <label>Service Name</label>
+    // Добавление нового сервиса
+    const handleAddService = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await axios.post('http://localhost:5000/services', newService);
+        setServices([...services, response.data]);
+        setNewService({ name: '', description: '' });
+      } catch (err) {
+        setError('Error adding service');
+      }
+    };
+
+    // Удаление сервиса
+    const handleDeleteService = async (id) => {
+      try {
+        await axios.delete(`http://localhost:5000/services/${id}`);
+        setServices(services.filter((service) => service.id !== id));
+      } catch (err) {
+        setError('Error deleting service');
+      }
+    };
+
+    return (
+      <div className="container py-5">
+        <h2>Admin Panel</h2>
+        <form onSubmit={handleAddService}>
           <input
             type="text"
-            name="name"
+            placeholder="Service Name"
             value={newService.name}
-            onChange={handleChange}
-            placeholder="Enter service name"
-            required
+            onChange={(e) => setNewService({ ...newService, name: e.target.value })}
           />
-        </div>
-        <div className="input-group">
-          <label>Service Description</label>
-          <textarea
-            name="description"
-            value={newService.description}
-            onChange={handleChange}
-            placeholder="Enter service description"
-            required
-          />
-        </div>
-        <div className="input-group">
-          <label>Service Price</label>
           <input
-            type="number"
-            name="price"
-            value={newService.price}
-            onChange={handleChange}
-            placeholder="Enter service price"
-            required
+            type="text"
+            placeholder="Service Description"
+            value={newService.description}
+            onChange={(e) => setNewService({ ...newService, description: e.target.value })}
           />
-        </div>
-        <button type="submit" className="submit-btn">Add Service</button>
-      </form>
+          <button type="submit">Add Service</button>
+        </form>
 
-      {/* Services List */}
-      <h3>Services</h3>
-      <ul className="services-list">
-        {servicesmore.map((service) => (
-          <li key={service.id} className="service-item">
-            <div className="service-info">
-              <h4>{service.name}</h4>
+        {error && <p>{error}</p>}
+
+        <h3>Services List</h3>
+        <ul>
+          {services.map((service) => (
+            <li key={service.id}>
+              <h5>{service.name}</h5>
               <p>{service.description}</p>
-              <p className="price">Price: ${service.price}</p>
-            </div>
-            <button
-              className="delete-btn"
-              onClick={() => removeService(service.id)}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+              <button onClick={() => handleDeleteService(service.id)}>Delete</button>
+              <button onClick={() => history.push(`/service-more/${service.id}`)}>View Details</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
 export default AdminPanel;
