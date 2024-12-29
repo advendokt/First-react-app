@@ -3,6 +3,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login({ setIsAuthenticated }) {
+
+    const handleLogin = () => {
+      // Add console log to check login process
+      console.log("Attempting to login...");
+      
+      // Perform authentication logic here
+      // If successful:
+      setIsAuthenticated(true);
+      console.log("User logged in, authenticated:", true);
+    };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -48,7 +58,7 @@ function Login({ setIsAuthenticated }) {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">Login</button>
+        <button onClick={handleLogin} type="submit" className="btn btn-primary w-100">Login</button>
       </form>
     </div>
   );
