@@ -9,7 +9,7 @@ import Banner from './components/Banner';
 import Features from './components/Features';
 import About from './components/About';
 import Service from './components/Service';
-import Gallery from './components/Gallery';
+import Gallery from './components/Gallery';;
 import Contact from './components/Contact';
 import WhyUs from './Pages/WhyUs.jsx';
 import FeaturesMore from './Pages/FeaturesMore.jsx';
@@ -23,20 +23,22 @@ import Loading from './components/Loading';
 
 import './App.css';
 
-function App() {
+const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [servicesmore, setServicesmore] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // Fetch services from backend
-    fetch('http://localhost:5000/services')
+    fetch('http://localhost:5001/services')
       .then((response) => response.json())
       .then((data) => {
         setServicesmore(data);
       })
       .catch((error) => {
         console.error('Error fetching services:', error);
+        setError('Failed to load services');
       })
       .finally(() => {
         setLoading(false);
@@ -44,7 +46,7 @@ function App() {
   }, []);
 
   const addService = (service) => {
-    fetch('http://localhost:5000/services', {
+    fetch('http://localhost:5001/services', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,27 +55,40 @@ function App() {
     })
       .then((response) => response.json())
       .then((newService) => {
-        setServicesmore((prevServices) => [...prevServices, newService]);
+        setServicesmore([...servicesmore, newService]);
       })
-      .catch((error) => console.error('Error adding service:', error));
+      .catch((error) => {
+        console.error('Error adding service:', error);
+        setError('Failed to add service');
+      });
   };
   
-  
+
 
   const removeService = (id) => {
-    fetch(`http://localhost:5000/services/${id}`, {
+    fetch(`http://localhost:5001/services/${id}`, {
       method: 'DELETE',
     })
       .then(() => {
-        setServicesmore((prevServices) => prevServices.filter((service) => service.id !== id));
+        setServicesmore((prevServices) =>
+          prevServices.filter((service) => service.id !== id)
+        );
       })
-      .catch((error) => console.error('Error deleting service:', error));
+      .catch((error) => {
+        console.error('Error deleting service:', error);
+        setError('Failed to delete service');
+      });
   };
   
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Router>
       <Header />
+      {error && <div className="error">{error}</div>}
       <Routes>
         <Route path={ROUTES.HOME} element={
           <>
@@ -93,15 +108,14 @@ function App() {
 
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
 
-        <Route path="/admin"
-          element={isAuthenticated ? <AdminPanel servicesmore={servicesmore} addService={addService} removeService={removeService} /> : <Navigate to="/login" />}
-        />
+        <Route path="/admin" element={isAuthenticated ? <AdminPanel servicesmore={servicesmore} addService={addService} removeService={removeService} /> : <Navigate to="/login" />} />
       </Routes>
 
       <LanguageSwitcher />
       <Footer />
     </Router>
   );
-}
+};
+
 
 export default App;

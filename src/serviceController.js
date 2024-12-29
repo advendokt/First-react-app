@@ -5,6 +5,9 @@ import cors from 'cors';
 // Создаем приложение Express
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:5001' }));
+
+
 // Middleware
 app.use(cors()); // Разрешаем кросс-доменные запросы
 app.use(bodyParser.json()); // Парсим JSON в теле запроса

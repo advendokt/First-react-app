@@ -1,39 +1,102 @@
+/* Общие стили для админ панели */
 .admin-panel {
     padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
+    background-color: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.service-form {
-    margin-top: 20px;
+.admin-panel h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.service-form input {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
+.error {
+    background-color: #ffcccc;
+    color: #ff0000;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
     width: 100%;
-    max-width: 300px;
-    font-size: 1rem;
+    text-align: center;
 }
 
-.service-form button {
+/* Стили для формы добавления сервиса */
+.add-service-form {
+    width: 50%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.add-service-form input,
+.add-service-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-service-form button {
+    width: 100%;
     padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.service-form button:hover {
+.add-service-form button:hover {
     background-color: #45a049;
 }
 
-.service-form input {
-    display: block !important;
-    margin-bottom: 10px !important;
-    padding: 10px !important;
-    width: 100% !important;
-    max-width: 300px !important;
-    font-size: 1rem !important;
+/* Стили для списка сервисов */
+.services-list {
+    width: 50%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.services-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.services-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.services-list button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.services-list button:hover {
+    background-color: #ff2a2a;
+}
+
+/* Стиль для цены */
+.service-price {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-left: 20px;
 }
