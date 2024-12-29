@@ -23,74 +23,48 @@ import Loading from './components/Loading';
 
 import './App.css';
 
-const App = () => {
+function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [servicesmore, setServicesmore] = useState([]);
-  const [error, setError] = useState('');
 
-  // Загрузка сервисов с сервера
+  // Получение данных с сервера
   useEffect(() => {
-    fetch('http://localhost:5001/services')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch services');
-        }
-        return response.json();
-      })
+    fetch('http://localhost:3000/api/services')
+      .then((response) => response.json())
       .then((data) => {
         setServicesmore(data);
+        setLoading(false); // Set loading to false after data is fetched
       })
       .catch((error) => {
         console.error('Error fetching services:', error);
-        setError('Failed to load services');
-      })
-      .finally(() => {
-        setLoading(false);
+        setLoading(false); // Set loading to false even if there is an error
       });
   }, []);
 
-  // Добавление нового сервиса
   const addService = (service) => {
-    fetch('http://localhost:5001/services', {
+    fetch('http://localhost:3000/api/services', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(service),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((newService) => {
-        setServicesmore((prevServices) => [...prevServices, newService]);
+        setServicesmore([...servicesmore, newService]);
       })
-      .catch((error) => {
-        console.error('Error adding service:', error);
-        setError('Failed to add service');
-      });
+      .catch((error) => console.error('Error adding service:', error));
   };
 
-  // Удаление сервиса
   const removeService = (id) => {
-    fetch(`http://localhost:5001/services/${id}`, {
+    fetch(`http://localhost:3000/api/services/${id}`, {
       method: 'DELETE',
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        setServicesmore((prevServices) =>
-          prevServices.filter((service) => service.id !== id)
-        );
+      .then(() => {
+        setServicesmore(servicesmore.filter((service) => service.id !== id));
       })
-      .catch((error) => {
-        console.error('Error deleting service:', error);
-        setError('Failed to delete service');
-      });
+      .catch((error) => console.error('Error deleting service:', error));
   };
 
   if (loading) {
@@ -100,53 +74,36 @@ const App = () => {
   return (
     <Router>
       <Header />
-      {error && <div className="error">{error}</div>}
       <Routes>
-        <Route
-          path={ROUTES.HOME}
-          element={
-            <>
-              <Banner />
-              <Features />
-              <About />
-              <Service />
-              <Gallery />
-              <Contact />
-            </>
-          }
-        />
-        <Route path="/services/:id" element={<ServiceMore />} />
+        {/* Other Routes */}
+        <Route path={ROUTES.HOME} element={
+          <>
+            <Banner />
+            <Features />
+            <About />
+            <Service />
+            <Gallery />
+            <Contact />
+          </>
+        } />
+
         <Route path={ROUTES.FEATURES_MORE} element={<FeaturesMore />} />
         <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
-        <Route
-          path={ROUTES.SERVICES_MORE}
-          element={<ServiceMore servicesmore={servicesmore} />}
-        />
-
+        <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore servicesmore={servicesmore} />} />
         <Route path={ROUTES.WHY_US} element={<WhyUs />} />
-        <Route
-          path="/login"
-          element={<Login setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/admin"
-          element={
-            isAuthenticated ? (
-              <AdminPanel
-                servicesmore={servicesmore}
-                addService={addService}
-                removeService={removeService}
-              />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+
+        {/* Admin Panel Route */}
+        <Route path="/admin"
+          element={isAuthenticated ? <AdminPanel servicesmore={servicesmore} setServicesmore={setServicesmore} addService={addService} removeService={removeService} /> : <Navigate to="/login" />}
         />
       </Routes>
+
       <LanguageSwitcher />
       <Footer />
     </Router>
   );
-};
+}
 
 export default App;

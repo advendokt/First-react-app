@@ -1,59 +1,56 @@
-/* ServiceMore.css */
-
-/* Основной стиль для контейнера */
 .container {
-  position: relative;
-  width: 100%;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f8f9fa; /* Цвет фона для контейнера */
-  border: 2px solid #007bff; /* Граница контейнера для видимости */
-  border-radius: 8px; /* Округление углов */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для выделения */
+  margin-top: 30px;
 }
 
-/* Стиль для карточки */
 .card {
-  margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #ddd; /* Add border */
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
-/* Позиционирование картинки внутри карточки */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
 .card-img-top {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 200px;
   object-fit: cover;
 }
 
-/* Стиль для текста в карточке */
 .card-body {
   padding: 20px;
 }
 
-/* Стиль для футера карточки */
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
 .card-footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
+  background-color: #f8f9fa;
+  border-top: none;
+  padding: 10px 20px;
+  text-align: right;
 }
 
-/* Уведомление о загрузке */
-.text-center {
-  font-size: 18px;
-  text-align: center;
-  padding: 20px;
-  color: #007bff;
-}
-
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 5px;
+.card-footer small {
+  color: #888;
 }

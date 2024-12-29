@@ -12,4 +12,14 @@ need install [
     node
     aos
     bootstrap - 5.3.3.
+    AXIO
 ]
+
+
+If you want for start web page launch 
+
+/server/Server.js
+
+/server/controllers/serviceController.js
+
+and main directori = npm run dev

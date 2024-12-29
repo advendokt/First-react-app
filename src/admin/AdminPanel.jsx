@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import './AdminPanel.css';
 
-const AdminPanel = ({ servicesmore, addService, removeService }) => {
+const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
   const [newService, setNewService] = useState({ name: '', description: '', price: '' });
   const [error, setError] = useState('');
 
-  const handleAddService = (e) => {
+  // Удаляем дублирующиеся сервисы
+  const uniqueServices = servicesmore.filter(
+    (service, index, self) =>
+      index === self.findIndex((s) => s.id === service.id)
+  );
+
+  const handleAddService = async (e) => {
     e.preventDefault();
     if (newService.name && newService.description && newService.price) {
-      addService(newService);
-      setNewService({ name: '', description: '', price: '' });
-      setError('');
+      try {
+        const response = await axios.post('http://localhost:3000/api/services', newService);
+        setNewService({ name: '', description: '', price: '' });
+        setError('');
+        setServicesmore([...servicesmore, response.data]); // Update the services list
+        console.log('Service added:', response.data);
+      } catch (err) {
+        setError('Error adding service');
+        console.error('Error adding service:', err.response ? err.response.data : err); // Log the error
+      }
     } else {
       setError('All fields are required');
     }
@@ -48,9 +63,8 @@ const AdminPanel = ({ servicesmore, addService, removeService }) => {
       <div className="services-list">
         <h3>Current Services</h3>
         <ul>
-          {servicesmore.map((service) => (
-            // Ensure service.id is unique
-            <li key={service.id}>
+          {uniqueServices.map((service, index) => (
+            <li key={service.id || `service-${index}`}>
               <div>
                 <strong>{service.name}</strong>: {service.description}
                 <span className="service-price">${service.price}</span>
@@ -60,9 +74,19 @@ const AdminPanel = ({ servicesmore, addService, removeService }) => {
           ))}
         </ul>
       </div>
-
     </div>
   );
+};
+
+AdminPanel.propTypes = {
+  servicesmore: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  })).isRequired,
+  setServicesmore: PropTypes.func.isRequired,
+  removeService: PropTypes.func.isRequired,
 };
 
 export default AdminPanel;
