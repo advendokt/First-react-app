@@ -1,26 +1,18 @@
-import { MongoClient } from 'mongodb';
+import mysql from 'mysql2';
 
-const url = 'mongodb://localhost:27017'; // Замените на адрес вашей базы данных
-const client = new MongoClient(url);
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'admin',  // или другой пользователь
+  password: '12345678',  // пароль для пользователя
+  database: 'my_database'  // имя базы данных
+});
 
-let db;
-
-const connectToDB = async () => {
-  try {
-    await client.connect();
-    console.log('Подключено к MongoDB');
-    db = client.db('yourDatabaseName'); // Замените на имя вашей базы данных
-  } catch (error) {
-    console.error('Ошибка подключения к базе данных:', error);
-    throw error;
+db.connect((err) => {
+  if (err) {
+    console.error('Ошибка подключения к базе данных: ', err);
+  } else {
+    console.log('Успешно подключено к базе данных!');
   }
-};
+});
 
-const getDB = () => {
-  if (!db) {
-    throw new Error('База данных не подключена. Сначала вызовите connectToDB.');
-  }
-  return db;
-};
-
-export { connectToDB, getDB };
+export default db;

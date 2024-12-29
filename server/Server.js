@@ -1,20 +1,16 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const serviceController = require('./serviceController'); // Import the service controller
+import express from 'express';
+import { getServices, addService, deleteService } from '../src/serviceController.js'; // исправьте путь, если необходимо
+import db from './db.js';  // если db.js находится в той же папке
 
 const app = express();
+app.use(express.json());
 
-// Middleware setup
-app.use(cors()); // Allow cross-origin requests
-app.use(bodyParser.json()); // Parse incoming JSON requests
+// Обработчики маршрутов
+app.get('/services', getServices);
+app.post('/services', addService);
+app.delete('/services/:id', deleteService);
 
-// Use the routes from the service controller
-app.use(serviceController);
-
-// Server Setup
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

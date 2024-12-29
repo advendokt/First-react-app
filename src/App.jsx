@@ -28,101 +28,73 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [servicesmore, setServicesmore] = useState([]);
 
-  // Fetch services from the backend
-  const fetchServices = async () => {
-    try {
-      const response = await fetch('/services'); // Backend URL (Proxy in development)
-      if (response.ok) {
-        const data = await response.json();
-        setServicesmore(data);
-      } else {
-        console.error('Error fetching services');
-      }
-    } catch (error) {
-      console.error('Error fetching services:', error);
-      alert('Could not load services.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch services on component mount
   useEffect(() => {
-    fetchServices();
+    // Fetch services from backend
+    fetch('http://localhost:5000/services')
+      .then((response) => response.json())
+      .then((data) => {
+        setServicesmore(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching services:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  const addService = async (service) => {
-    try {
-      const response = await fetch('/services', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(service),
-      });
-
-      if (response.ok) {
-        const newService = await response.json();
+  const addService = (service) => {
+    fetch('http://localhost:5000/services', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(service),
+    })
+      .then((response) => response.json())
+      .then((newService) => {
         setServicesmore((prevServices) => [...prevServices, newService]);
-      } else {
-        console.error('Error adding service');
-      }
-    } catch (error) {
-      console.error('Error adding service:', error);
-    }
+      })
+      .catch((error) => console.error('Error adding service:', error));
   };
+  
+  
 
-  const removeService = async (id) => {
-    try {
-      const response = await fetch(`/services/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
+  const removeService = (id) => {
+    fetch(`http://localhost:5000/services/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
         setServicesmore((prevServices) => prevServices.filter((service) => service.id !== id));
-      } else {
-        console.error('Error deleting service');
-      }
-    } catch (error) {
-      console.error('Error deleting service:', error);
-    }
+      })
+      .catch((error) => console.error('Error deleting service:', error));
   };
-
-  if (loading) {
-    return <Loading />;
-  }
+  
 
   return (
     <Router>
       <Header />
       <Routes>
-        <Route
-          path={ROUTES.HOME}
-          element={
-            <>
-              <Banner />
-              <Features />
-              <About />
-              <Service />
-              <Gallery />
-              <Contact />
-            </>
-          }
-        />
+        <Route path={ROUTES.HOME} element={
+          <>
+            <Banner />
+            <Features />
+            <About />
+            <Service />
+            <Gallery />
+            <Contact />
+          </>
+        } />
+
         <Route path={ROUTES.FEATURES_MORE} element={<FeaturesMore />} />
         <Route path={ROUTES.ABOUT_MORE} element={<AboutMore />} />
         <Route path={ROUTES.SERVICES_MORE} element={<ServiceMore servicesmore={servicesmore} />} />
         <Route path={ROUTES.WHY_US} element={<WhyUs />} />
+
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route
-          path="/admin"
-          element={
-            isAuthenticated ? (
-              <AdminPanel servicesmore={servicesmore} addService={addService} removeService={removeService} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+
+        <Route path="/admin"
+          element={isAuthenticated ? <AdminPanel servicesmore={servicesmore} addService={addService} removeService={removeService} /> : <Navigate to="/login" />}
         />
       </Routes>
 
