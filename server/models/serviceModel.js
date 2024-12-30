@@ -1,59 +1,56 @@
-import mysql from 'mysql2';
+// serviceModel.js
+import connection from '../config/connection.js';
 
-// Create a connection pool
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'admin', // replace with your MySQL username
-  password: '12345678', // replace with your MySQL password
-  database: 'yourdbname',
-});
+// Функция для добавления нового сервиса в базу данных
+export const addService = (newService) => {
+  return new Promise((resolve, reject) => {
+    const { name, description, price, image } = newService;
 
-// Promisify the pool.query function for convenience
-const promisePool = pool.promise();
+    const query = 'INSERT INTO services (name, description, price, image_path) VALUES (?, ?, ?, ?)';
+    const values = [name, description, price, image];
 
-// Get all services
-export const getAllServices = async () => {
-  try {
-    const [rows] = await promisePool.query('SELECT * FROM services');
-    return rows;
-  } catch (error) {
-    throw new Error('Error fetching services from the database: ' + error.message);
-  }
+    connection.query(query, values, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve({
+          id: results.insertId,
+          name,
+          description,
+          price,
+          image
+        });
+      }
+    });
+  });
 };
 
-// Get a service by ID
-export const getServiceById = async (id) => {
-  try {
-    const [rows] = await promisePool.query('SELECT * FROM services WHERE id = ?', [id]);
-    return rows[0]; // Only one result should be returned
-  } catch (error) {
-    throw new Error('Error fetching service from the database: ' + error.message);
-  }
+// Функция для получения всех сервисов
+export const getAllServices = () => {
+  return new Promise((resolve, reject) => {
+    const query = 'SELECT * FROM services';
+
+    connection.query(query, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 };
 
-// Add a new service
-export const addService = async (service) => {
-  try {
-    const { name, description, price, image } = service;
-    const [result] = await promisePool.query(
-      'INSERT INTO services (name, description, price, imagePath) VALUES (?, ?, ?, ?)',
-      [name, description, price, image]
-    );
-    return { id: result.insertId, ...service }; // Return the newly inserted service with the ID
-  } catch (error) {
-    throw new Error('Error adding service to the database: ' + error.message);
-  }
-};
+// Функция для удаления сервиса
+export const deleteService = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = 'DELETE FROM services WHERE id = ?';
 
-// Delete a service by ID
-export const deleteService = async (id) => {
-  try {
-    const [result] = await promisePool.query('DELETE FROM services WHERE id = ?', [id]);
-    if (result.affectedRows === 0) {
-      throw new Error('Service not found');
-    }
-    return result;
-  } catch (error) {
-    throw new Error('Error deleting service from the database: ' + error.message);
-  }
+    connection.query(query, [id], (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 };

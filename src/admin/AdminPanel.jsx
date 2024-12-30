@@ -17,6 +17,12 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
   const handleAddService = async (e) => {
     e.preventDefault();
     if (newService.name && newService.description && newService.price) {
+      // Validate price
+      if (isNaN(newService.price) || parseFloat(newService.price) <= 0) {
+        setError('Price must be a positive number');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('name', newService.name);
       formData.append('description', newService.description);
@@ -36,11 +42,11 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
         setNewService({ name: '', description: '', price: '' });
         setImage(null);
         setError('');
-        setServicesmore([...servicesmore, response.data.service]); // Update the services list
+        setServicesmore((prevServices) => [...prevServices, response.data.service]); // Update the services list
         console.log('Service added:', response.data);
       } catch (err) {
-        setError('Error adding service');
-        console.error('Error adding service:', err.response ? err.response.data : err); // Log the error
+        setError(err.response ? err.response.data.message : 'Error adding service');
+        console.error('Error adding service:', err.response ? err.response.data : err);
       }
     } else {
       setError('All fields are required');

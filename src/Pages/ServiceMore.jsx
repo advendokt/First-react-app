@@ -1,9 +1,10 @@
+// ServiceMore.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ServiceMore.css';
 
-const ServiceMore = ({ servicesmore }) => {
-  const [services, setServices] = useState(servicesmore);
+const ServiceMore = () => {
+  const [services, setServices] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -11,11 +12,9 @@ const ServiceMore = ({ servicesmore }) => {
     const fetchServices = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/services');
-        console.log('Fetched services:', response.data);  // Для отладки
         setServices(response.data);
       } catch (err) {
         setError('Error fetching services');
-        console.error(err);
       }
     };
 
@@ -27,7 +26,7 @@ const ServiceMore = ({ servicesmore }) => {
   }
 
   if (services.length === 0) {
-    return <div className="text-center">Loading...</div>;  // Пока данные загружаются
+    return <div>Loading...</div>;
   }
 
   return (
@@ -35,19 +34,16 @@ const ServiceMore = ({ servicesmore }) => {
       <div className="row">
         {services.map((service) => (
           <div key={service.id} className="col-md-4">
-            <div className="card shadow-sm mb-4">
+            <div className="card">
               <img
                 src={service.image ? `http://localhost:3000${service.image}` : 'https://via.placeholder.com/400x300'}
-                className="card-img-top"
                 alt={service.name}
+                className="card-img-top"
               />
               <div className="card-body">
-                <h2 className="card-title">{service.name}</h2>
+                <h5 className="card-title">{service.name}</h5>
                 <p className="card-text">{service.description}</p>
                 <p className="card-text"><strong>Price:</strong> ${service.price}</p>
-              </div>
-              <div className="card-footer text-muted">
-                <small>Service ID: {service.id}</small>
               </div>
             </div>
           </div>
