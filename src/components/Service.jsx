@@ -6,6 +6,8 @@ import { faShieldAlt, faCloud, faLaptop, faCalendarAlt } from '@fortawesome/free
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import './Service.css'
+
 function Service() {
     const { t } = useTranslation();
     const navigate = useNavigate();

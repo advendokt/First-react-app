@@ -30,10 +30,10 @@ const ServiceMore = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container container-margin">
       <div className="row">
         {services.map((service) => (
-          <div key={service.id} className="col-md-4">
+          <div key={service.id} className="col-12 col-sm-6 col-md-4">
             <div className="card">
               <img
                 src={service.image ? `http://localhost:3000${service.image}` : 'https://via.placeholder.com/400x300'}

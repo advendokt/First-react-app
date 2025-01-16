@@ -1,42 +1,31 @@
-.container {
-  margin-top: 30px;
+/* Add some spacing around the container */
+.container-margin {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
+/* Style the cards for better appearance */
 .card {
-  border: 1px solid #ddd; /* Add border */
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  margin-bottom: 1.5rem; /* Space between cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+  border-radius: 0.5rem; /* Rounded corners */
 }
 
 .card-img-top {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  height: 200px;
-  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  height: 200px; /* Uniform image height */
+  object-fit: cover; /* Ensure the image fits well */
 }
 
 .card-body {
-  padding: 20px;
+  text-align: center;
 }
 
 .card-title {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .card-text {
@@ -44,13 +33,6 @@
   color: #555;
 }
 
-.card-footer {
-  background-color: #f8f9fa;
-  border-top: none;
-  padding: 10px 20px;
-  text-align: right;
-}
-
-.card-footer small {
-  color: #888;
+.card-text strong {
+  color: #000;
 }

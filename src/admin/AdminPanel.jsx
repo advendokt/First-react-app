@@ -17,21 +17,16 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
   const handleAddService = async (e) => {
     e.preventDefault();
     if (newService.name && newService.description && newService.price) {
-      // Validate price
-      if (isNaN(newService.price) || parseFloat(newService.price) <= 0) {
-        setError('Price must be a positive number');
-        return;
-      }
-
       const formData = new FormData();
       formData.append('name', newService.name);
       formData.append('description', newService.description);
       formData.append('price', newService.price);
+
       if (image) {
-        formData.append('image', image); // Ensure the field name matches the server-side code
+        formData.append('image', image); // Если изображение выбрано, добавляем его
       }
 
-      console.log('Form data:', newService, image); // Log the form data for debugging
+      console.log('Form data:', newService, image); // Логирование данных формы для отладки
 
       try {
         const response = await axios.post('http://localhost:3000/api/services', formData, {
@@ -42,11 +37,11 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
         setNewService({ name: '', description: '', price: '' });
         setImage(null);
         setError('');
-        setServicesmore((prevServices) => [...prevServices, response.data.service]); // Update the services list
+        setServicesmore([...servicesmore, response.data.service]); // Обновляем список сервисов
         console.log('Service added:', response.data);
       } catch (err) {
-        setError(err.response ? err.response.data.message : 'Error adding service');
-        console.error('Error adding service:', err.response ? err.response.data : err);
+        setError('Error adding service');
+        console.error('Error adding service:', err.response ? err.response.data : err); // Логирование ошибки
       }
     } else {
       setError('All fields are required');
@@ -95,7 +90,7 @@ const AdminPanel = ({ servicesmore, setServicesmore, removeService }) => {
                 <strong>{service.name}</strong>: {service.description}
                 <span className="service-price">${service.price}</span>
               </div>
-              <button onClick={() => removeService(service.id)}>Delete</button> {/* Ensure the id is passed correctly */}
+              <button onClick={() => removeService(service.id)}>Delete</button> {/* Удаление сервиса */}
             </li>
           ))}
         </ul>
